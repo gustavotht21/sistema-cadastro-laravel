@@ -2,18 +2,27 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
-use PHPUnit\TestRunner\TestResult\TestRunnerTriggeredDeprecationSubscriber;
 
 class CategoryController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $query = trim($request->searchText);
+        $categories = Category::select('id', 'name', 'description')
+            ->where('name', 'LIKE', "%".$query."%")
+            ->where('condition', '=', '1')
+            ->orderBy('name')
+            ->paginate(7);
+        return Inertia::render("EstoqueCategoriaIndex", [
+            'categories' => $categories,
+            'searchText' => $query
+        ]);
     }
 
     /**
@@ -21,7 +30,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        //  
+        return Inertia::render("EstoqueCategoriaCreate");
     }
 
     /**
@@ -29,7 +38,18 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+           'name' => 'required'
+        ]);
+
+        $category = new Category();
+
+        $category->name = $request->name;
+        $category->description = $request->description;
+        $category->condition = 1;
+        $category->save();
+
+        return redirect()->route("estoque.categoria.index");
     }
 
     /**
@@ -37,7 +57,9 @@ class CategoryController extends Controller
      */
     public function show(string $id)
     {
-        //
+        return Inertia::render("EstoqueCategoriaShow", [
+            "category" => Category::find($id)
+        ]);
     }
 
     /**
@@ -45,7 +67,9 @@ class CategoryController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        return Inertia::render("EstoqueCategoriaEdit", [
+            "category" => Category::find($id)
+        ]);
     }
 
     /**
@@ -53,7 +77,13 @@ class CategoryController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $category = Category::find($id);
+
+        $category->name = $request->name;
+        $category->description = $request->description;
+        $category->update();
+
+        return redirect()->route("estoque.categoria.index");
     }
 
     /**
@@ -61,6 +91,11 @@ class CategoryController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $category = Category::find($id);
+
+        $category->condition = 0;
+        $category->update();
+
+        return redirect()->route("estoque.categoria.index");
     }
 }
