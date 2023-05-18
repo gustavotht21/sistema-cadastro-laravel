@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -34,5 +35,23 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+
+Route::get('estoque/categoria', [CategoryController::class, 'index'])
+    ->middleware('auth', 'verified')->name('estoque.categoria.index');
+
+Route::get('estoque/categoria/edit/{category}', [CategoryController::class, 'edit'])
+    ->middleware('auth', 'verified')->name('estoque.categoria.edit');
+
+Route::get('estoque/categoria/delete/{category}', [CategoryController::class, 'destroy'])
+    ->middleware('auth', 'verified')->name('estoque.categoria.delete');
+
+Route::post('estoque/categoria', [CategoryController::class, 'index'])
+    ->middleware('auth', 'verified')->name('estoque.categoria.search');
+
+Route::get("estoque/categoria/add", [CategoryController::class, "create"])
+    ->middleware(['auth', 'verified'])->name("estoque.categoria.create");
+
+Route::post("estoque/categoria/add", [CategoryController::class, "store"])
+    ->middleware(['auth', 'verified'])->name("estoque.categoria.store");
 
 require __DIR__.'/auth.php';
