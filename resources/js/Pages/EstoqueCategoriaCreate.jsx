@@ -9,7 +9,7 @@ import SecondaryButton from "@/Components/SecondaryButton.jsx";
 export default function EstoqueCategoriaCreate({ auth }) {
 
     const { data, setData, post, processing, errors } = useForm({
-        category: '',
+        name: '',
         description: '',
     });
 
@@ -32,16 +32,16 @@ export default function EstoqueCategoriaCreate({ auth }) {
             <form onSubmit={submit} className={"flex justify-center"} method={"post"}>
                 <div className={"w-3/4 mt-6"}>
                     <div className={"w-full mt-2"}>
-                        <InputLabel htmlFor={"category"} value={"Nome"}/>
+                        <InputLabel htmlFor={"name"} value={"Nome"}/>
                         <TextInput
                             type="text"
-                            id="category"
-                            name="category"
-                            value={data.category}
+                            id="name"
+                            name="name"
+                            value={data.name}
                             onChange={onHandleChange}
                             className="w-full"
-                            required
                         />
+                        <p className={'text-sm text-red-600'}>{errors.name}</p>
                     </div>
                     <div className={"w-full mt-2"}>
                         <InputLabel htmlFor={"description"} value={"Descrição"}/>
@@ -52,8 +52,8 @@ export default function EstoqueCategoriaCreate({ auth }) {
                             value={data.description}
                             onChange={onHandleChange}
                             className="w-full"
-                            required
                         />
+                        <p className={'text-sm text-red-600'}>{errors.description}</p>
                     </div>
                     <div className={"w-full flex justify-between mt-6"}>
                         <Link href={route("estoque.categoria.index")}>
