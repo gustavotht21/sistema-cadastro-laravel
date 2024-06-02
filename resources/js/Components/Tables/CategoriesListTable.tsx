@@ -85,7 +85,7 @@ export default function CategoriesListTable({
                             message={"Edit"}
                         />
                         <TableActionDelete
-                            routePost={["welcome", {
+                            routePost={["categories.destroy", {
                                 category: category.id
                             }]}
                         />
