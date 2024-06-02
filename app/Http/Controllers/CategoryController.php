@@ -17,14 +17,14 @@ class CategoryController extends Controller
     {
     }
 
-    public function create(): Response
+    public function index(): Response
     {
         return $this->categoryService->index();
     }
 
-    public function index(): void
+    public function create(): Response
     {
-        //
+        return $this->categoryService->create();
     }
 
     public function store(StoreCategoryRequest $request): void

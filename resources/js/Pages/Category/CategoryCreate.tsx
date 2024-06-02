@@ -1,7 +1,7 @@
 import React, {ChangeEventHandler, FormEvent, FormEventHandler, ReactElement} from "react";
 import Authenticated from "@/Layouts/AuthenticatedLayout";
 import {PageProps} from "@/types";
-import {useForm} from "@inertiajs/react";
+import {Link, useForm} from "@inertiajs/react";
 import {TChangeElement} from "@/types/forms";
 import InputError from "@/Components/InputError";
 import InputLabel from "@/Components/InputLabel";
@@ -10,6 +10,8 @@ import PrimaryButton from "@/Components/PrimaryButton";
 import SecondaryButton from "@/Components/SecondaryButton";
 import SuccessfullyTransition from "@/Components/SuccesfullyTransition";
 import TextAreaInput from "@/Components/TextAreaInput";
+import {Simulate} from "react-dom/test-utils";
+
 
 type TForm = {
     name: string,
@@ -23,6 +25,7 @@ export default function CategoryCreate({auth}: PageProps): ReactElement {
         setData,
         errors,
         post,
+        reset,
         recentlySuccessful,
     } = useForm<TForm>({
         name       : "",
@@ -35,7 +38,9 @@ export default function CategoryCreate({auth}: PageProps): ReactElement {
 
     const submit: FormEventHandler = (e: FormEvent<HTMLFormElement>): void => {
         e.preventDefault();
-        post(route("categories.store"));
+        post(route("categories.store"), {
+            onSuccess: () => reset(),
+        });
     };
 
     return <Authenticated
@@ -91,9 +96,11 @@ export default function CategoryCreate({auth}: PageProps): ReactElement {
                     Save
                 </PrimaryButton>
 
-                <SecondaryButton>
-                    Cancel
-                </SecondaryButton>
+                <Link href={route("categories.index")}>
+                    <SecondaryButton>
+                        Cancel
+                    </SecondaryButton>
+                </Link>
             </div>
 
         </form>
