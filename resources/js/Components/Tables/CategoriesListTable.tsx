@@ -75,7 +75,7 @@ export default function CategoriesListTable({
                             Active
                         </span>
                          :
-                         <span className="text-rose-500 dark:text-rose-600 px-3 py-1 bg-rose-200 dark:bg-rose-800/50 rounded-md font-semibold">
+                         <span className="text-rose-500 dark:text-rose-400 px-3 py-1 bg-rose-200 dark:bg-rose-800/50 rounded-md font-semibold">
                             Inactive
                         </span>}</Td>
                     <Td className={"flex gap-2 justify-center flex-wrap"}>
