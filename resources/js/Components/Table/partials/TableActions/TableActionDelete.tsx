@@ -20,9 +20,11 @@ export default function TableActionDelete({
         setConfirmingComponentDeletion(true);
     };
 
+    const {delete: destroy} = useForm();
+
     const closeDeleteModal = (): void => {
         setConfirmingComponentDeletion(false);
-        useForm().delete(route(routePost[0], routePost[1]));
+        destroy(route(routePost[0], routePost[1]));
     };
 
     const closeModal = () => {
@@ -41,19 +43,19 @@ export default function TableActionDelete({
         >
             <form className="p-6 relative flex flex-col justify-center items-center">
                 <h1 className="text-lg font-medium text-gray-900 dark:text-gray-100">
-                    Confirmação de deleção
+                    Confirm delete
                 </h1>
                 <p className="text-sm text-center text-gray-600 dark:text-gray-400 mt-2">
-                    Você tem certeza que deseja deletar este item?
+                    Are you sure that want to delete this item?
                 </p>
                 <p className="text-sm text-center text-gray-600 dark:text-gray-400 mt-2">
-                    Não será possível recuperá-lo posteriormente.
+                    This action cannot be undone.
                 </p>
                 <div className={"flex w-full justify-around mt-4"}>
                     <SecondaryButton
                         onClick={closeModal}
                     >
-                        Cancelar
+                        Cancel
                     </SecondaryButton>
 
                     <DangerButton

@@ -58,6 +58,6 @@ class CategoryService
 
     public function destroy(Category $category): void
     {
-        //
+        $category->delete();
     }
 }

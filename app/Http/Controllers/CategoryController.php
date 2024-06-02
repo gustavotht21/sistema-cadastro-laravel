@@ -49,6 +49,6 @@ class CategoryController extends Controller
 
     public function destroy(Category $category): void
     {
-        //
+        $this->categoryService->destroy($category);
     }
 }
