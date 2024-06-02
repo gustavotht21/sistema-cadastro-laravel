@@ -35,7 +35,7 @@ it('should be able to edit a category', function () {
 /*
  * Category name field validation
  */
-it('should category has name', function () {
+it('should category name cannot be nullable', function () {
     $user = User::factory()->create();
     actingAs($user);
 
@@ -122,7 +122,7 @@ it('should category name has at most 255 characters', function () {
 /*
  * Category description field validation
  */
-it('should be able to update a category without description', function () {
+it('should category description be nullable', function () {
     $user = User::factory()->create();
     actingAs($user);
 
@@ -146,7 +146,7 @@ it('should be able to update a category without description', function () {
     ]);
 });
 
-it('should category description can be bigger than 255 characters', function () {
+it('should category description has at least 8 characters', function () {
     $user = User::factory()->create();
     $description = str_repeat('a', 256);
     actingAs($user);
@@ -171,7 +171,7 @@ it('should category description can be bigger than 255 characters', function () 
     ]);
 });
 
-it('should a new category description has at least 8 characters', function () {
+it('should category description be bigger than 255 characters', function () {
     $user = User::factory()->create();
     actingAs($user);
 
