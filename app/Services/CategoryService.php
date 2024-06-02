@@ -12,7 +12,7 @@ class CategoryService
     public function index(): Response
     {
         return Inertia::render('Category/CategoryIndex', [
-            'categories' => Category::query()->get(),
+            'categories' => Category::search(),
         ]);
     }
 

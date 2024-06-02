@@ -23,6 +23,6 @@ export function SortBy<T>(field: string, sorting: TOrdering<T>): void {
                           asc : "desc",
                           desc: "asc"
                       }[sorting.direction] || "asc";
-    router.visit(`${route(route().current() as string, sorting.routeParameters)}?ordem=${field}&direcao=${dir}`);
+    router.visit(`${route(route().current() as string, sorting.routeParameters)}?order=${field}&direction=${dir}`);
 }
 

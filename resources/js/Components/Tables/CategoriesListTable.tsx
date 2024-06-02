@@ -68,7 +68,7 @@ export default function CategoriesListTable({
                 >
                     <Td>{category.name}</Td>
                     <Td>{category.description ?? "No description added"}</Td>
-                    <Td>{category.status
+                    <Td>{category.status === "Active"
                          ?
                          <span className="text-emerald-500 dark:text-emerald-600 px-3 py-1 bg-emerald-200 dark:bg-emerald-800/50 rounded-md font-semibold">
                             Active
