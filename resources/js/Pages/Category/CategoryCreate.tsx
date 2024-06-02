@@ -9,6 +9,7 @@ import TextInput from "@/Components/TextInput";
 import PrimaryButton from "@/Components/PrimaryButton";
 import SecondaryButton from "@/Components/SecondaryButton";
 import SuccessfullyTransition from "@/Components/SuccesfullyTransition";
+import TextAreaInput from "@/Components/TextAreaInput";
 
 type TForm = {
     name: string,
@@ -76,7 +77,7 @@ export default function CategoryCreate({auth}: PageProps): ReactElement {
                     htmlFor="description"
                     value="Description"
                 />
-                <TextInput
+                <TextAreaInput
                     id="description"
                     name="description"
                     value={data.description}
