@@ -8,9 +8,12 @@ use Inertia\Response;
 
 class CategoryService
 {
+
     public function index(): Response
     {
-        return Inertia::render("Category/CategoryCreate");
+        return Inertia::render('Category/CategoryIndex', [
+            'categories' => Category::query()->get(),
+        ]);
     }
 
     /**
@@ -25,9 +28,9 @@ class CategoryService
         ]);
     }
 
-    public function create(): void
+    public function create(): Response
     {
-        //
+        return Inertia::render("Category/CategoryCreate");
     }
 
     public function show(Category $category): void
