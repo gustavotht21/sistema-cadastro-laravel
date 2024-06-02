@@ -44,7 +44,7 @@ export default function ResetPassword({ token, email }: { token: string, email: 
                         onChange={(e) => setData('email', e.target.value)}
                     />
 
-                    <InputError message={errors.email} className="mt-2" />
+                    <InputError message={errors.email} />
                 </div>
 
                 <div className="mt-4">
@@ -61,7 +61,7 @@ export default function ResetPassword({ token, email }: { token: string, email: 
                         onChange={(e) => setData('password', e.target.value)}
                     />
 
-                    <InputError message={errors.password} className="mt-2" />
+                    <InputError message={errors.password} />
                 </div>
 
                 <div className="mt-4">
@@ -76,7 +76,7 @@ export default function ResetPassword({ token, email }: { token: string, email: 
                         onChange={(e) => setData('password_confirmation', e.target.value)}
                     />
 
-                    <InputError message={errors.password_confirmation} className="mt-2" />
+                    <InputError message={errors.password_confirmation} />
                 </div>
 
                 <div className="flex items-center justify-end mt-4">
