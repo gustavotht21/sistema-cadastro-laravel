@@ -48,8 +48,8 @@ export default function CategoriesListTable({
                     field: "description",
                     text : "Description"
                 }, {
-                    field: "condition",
-                    text : "Condition"
+                    field: "status",
+                    text : "Status"
                 },].map((th: {
                     field: string,
                     text: string,
@@ -68,10 +68,16 @@ export default function CategoriesListTable({
                     key={index}
                 >
                     <Td>{category.name}</Td>
-                    <Td>{category.description}</Td>
-                    <Td>{category.condition
-                         ? "Active"
-                         : "Inactive"}</Td>
+                    <Td>{category.description ?? "No description added"}</Td>
+                    <Td>{category.status
+                         ?
+                         <span className="text-emerald-500 dark:text-emerald-600 px-3 py-1 bg-emerald-200 dark:bg-emerald-800/50 rounded-md font-semibold">
+                            Active
+                        </span>
+                         :
+                         <span className="text-rose-500 dark:text-rose-600 px-3 py-1 bg-rose-200 dark:bg-rose-800/50 rounded-md font-semibold">
+                            Inactive
+                        </span>}</Td>
                     <Td className={"flex gap-2 justify-center flex-wrap"}>
                         <TableActionLink
                             redirectRoute={["welcome", {

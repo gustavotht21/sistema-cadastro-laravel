@@ -24,7 +24,7 @@ class CategoryService
         Category::query()->create([
             'name'        => $data['name'],
             'description' => $data['description'],
-            'condition'   => true,
+            'status'      => true,
         ]);
     }
 
