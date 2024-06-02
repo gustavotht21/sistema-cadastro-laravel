@@ -38,9 +38,11 @@ class CategoryService
         //
     }
 
-    public function edit(Category $category): void
+    public function edit(Category $category): Response
     {
-        //
+        return Inertia::render("Category/CategoryEdit", [
+            'category' => $category,
+        ]);
     }
 
     /**
@@ -48,7 +50,10 @@ class CategoryService
      */
     public function update(array $data, Category $category): void
     {
-        //
+        $category->update([
+            'name'        => $data['name'],
+            'description' => $data['description'],
+        ]);
     }
 
     public function destroy(Category $category): void

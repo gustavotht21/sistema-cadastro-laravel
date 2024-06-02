@@ -37,14 +37,14 @@ class CategoryController extends Controller
         //
     }
 
-    public function edit(Category $category): void
+    public function edit(Category $category): Response
     {
-        //
+        return $this->categoryService->edit($category);
     }
 
     public function update(UpdateCategoryRequest $request, Category $category): void
     {
-        //
+        $this->categoryService->update($request->validated(), $category);
     }
 
     public function destroy(Category $category): void
