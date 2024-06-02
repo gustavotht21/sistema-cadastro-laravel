@@ -14,7 +14,7 @@ export default function TableActionLink({
     return <Link
         href={
             Array.isArray(redirectRoute)
-            ? route(redirectRoute[0], [redirectRoute[1]])
+            ? route(redirectRoute[0], redirectRoute[1])
             : route(redirectRoute)
         }
     >

@@ -7,7 +7,7 @@ use function Pest\Laravel\post;
 /*
  * Feature test
  */
-it('should be able to create a new category', function () {
+it('should be able to create a category', function () {
     $user = User::factory()->create();
     actingAs($user);
 
@@ -26,7 +26,7 @@ it('should be able to create a new category', function () {
 /*
  * Category name field validation
  */
-it('should a new category has name', function () {
+it('should category name cannot be nullable', function () {
     $user = User::factory()->create();
     actingAs($user);
 
@@ -42,7 +42,7 @@ it('should a new category has name', function () {
     $this->assertDatabaseCount('categories', 0);
 });
 
-it('should a new category name has at least 3 characters', function () {
+it('should category name has at least 3 characters', function () {
     $user = User::factory()->create();
     actingAs($user);
 
@@ -63,7 +63,7 @@ it('should a new category name has at least 3 characters', function () {
     $this->assertDatabaseCount('categories', 0);
 });
 
-it('should a new category name has at most 255 characters', function () {
+it('should category name has at most 255 characters', function () {
     $user = User::factory()->create();
     $name = str_repeat('a', 256);
     actingAs($user);
@@ -88,7 +88,7 @@ it('should a new category name has at most 255 characters', function () {
 /*
  * Category description field validation
  */
-it('should be able to create a new category without description', function () {
+it('should category description be nullable', function () {
     $user = User::factory()->create();
     actingAs($user);
 
@@ -104,24 +104,7 @@ it('should be able to create a new category without description', function () {
     $this->assertDatabaseCount('categories', 1);
 });
 
-it('should a new category description be bigger than 255 characters', function () {
-    $user = User::factory()->create();
-    $description = str_repeat('a', 256);
-    actingAs($user);
-
-    post(route('categories.store'), [
-        'name'        => 'New category',
-        'description' => $description,
-    ])->assertOk();
-
-    $this->assertDatabaseHas('categories', [
-        'name'        => 'New category',
-        'description' => $description,
-    ]);
-    $this->assertDatabaseCount('categories', 1);
-});
-
-it('should a new category description has at least 8 characters', function () {
+it('should category description has at least 8 characters', function () {
     $user = User::factory()->create();
     $description = str_repeat('a', 7);
     actingAs($user);
@@ -141,4 +124,21 @@ it('should a new category description has at least 8 characters', function () {
         'description' => $description,
     ]);
     $this->assertDatabaseCount('categories', 0);
+});
+
+it('should category description be bigger than 255 characters', function () {
+    $user = User::factory()->create();
+    $description = str_repeat('a', 256);
+    actingAs($user);
+
+    post(route('categories.store'), [
+        'name'        => 'New category',
+        'description' => $description,
+    ])->assertOk();
+
+    $this->assertDatabaseHas('categories', [
+        'name'        => 'New category',
+        'description' => $description,
+    ]);
+    $this->assertDatabaseCount('categories', 1);
 });

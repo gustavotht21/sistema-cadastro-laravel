@@ -9,7 +9,6 @@ import {FilterItems, SortBy} from "@/Helpers/Table/FilterTableData";
 import {Table} from "@/Components/Table";
 import TableActionLink from "@/Components/Table/partials/TableActions/TableActionLink";
 import Td from "@/Components/Table/partials/Td";
-import TableActionPost from "@/Components/Table/partials/TableActions/TableActionPost";
 import TableActionDelete from "@/Components/Table/partials/TableActions/TableActionDelete";
 
 type TForm = {
@@ -80,13 +79,7 @@ export default function CategoriesListTable({
                         </span>}</Td>
                     <Td className={"flex gap-2 justify-center flex-wrap"}>
                         <TableActionLink
-                            redirectRoute={["welcome", {
-                                category: category.id
-                            }]}
-                            message={"Details"}
-                        />
-                        <TableActionPost
-                            routePost={["welcome", {
+                            redirectRoute={["categories.edit", {
                                 category: category.id
                             }]}
                             message={"Edit"}
