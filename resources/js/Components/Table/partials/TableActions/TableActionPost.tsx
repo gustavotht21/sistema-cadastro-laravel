@@ -21,7 +21,9 @@ export default function TableActionPost({
         patch(route(routePost[0], routePost[1]), {
             preserveScroll: true,
             onSuccess     : (): void => {
-                router.visit(route(route().current() as string),
+                router.visit(route(route().current() as string, {
+                        ...route().params
+                    }),
                     {
                         only          : [...urlParameters],
                         preserveScroll: true,
