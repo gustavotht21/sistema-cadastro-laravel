@@ -1,5 +1,7 @@
 # Register system
 
+Laravel system made using husky-hooks, larastan and laravel pint, using SOLID and DRY principles
+
 ## Index
 
 * [Getting started](#%EF%B8%8F-getting-started)
