@@ -56,16 +56,22 @@ it('should users can order categories content by description', function () {
 it('should users can order categories content by status', function () {
     actingAs(User::factory()->create());
 
-    Category::factory()->create(['status' => true]);
-    Category::factory()->create(['status' => false]);
+    Category::factory()->create([
+        'name'   => 'Category A',
+        'status' => true,
+    ]);
+    Category::factory()->create([
+        'name'   => 'Category B',
+        'status' => false,
+    ]);
 
     get(route('categories.index', [
-        'order'     => 'description',
+        'order'     => 'status',
         'direction' => 'desc',
     ]))
         ->assertOk()
         ->assertSeeInOrder([
-            'Inactive',
-            'Active',
+            'Category A',
+            'Category B',
         ]);
 });

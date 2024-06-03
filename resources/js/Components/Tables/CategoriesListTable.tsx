@@ -10,6 +10,9 @@ import {Table} from "@/Components/Table";
 import TableActionLink from "@/Components/Table/partials/TableActions/TableActionLink";
 import Td from "@/Components/Table/partials/Td";
 import TableActionDelete from "@/Components/Table/partials/TableActions/TableActionDelete";
+import TableActionPost from "@/Components/Table/partials/TableActions/TableActionPost";
+import {PencilSquareIcon, TrashIcon, XCircleIcon} from "@heroicons/react/16/solid";
+import {CheckCircleIcon} from "@heroicons/react/24/solid";
 
 type TForm = {
     name: string;
@@ -20,7 +23,6 @@ export default function CategoriesListTable({
                                             }: {
     categories: ICategory[];
 }) {
-
     const ordering: TOrdering<string> = {
         order          : route().params.order,
         direction      : route().params.direction,
@@ -67,27 +69,46 @@ export default function CategoriesListTable({
                     key={index}
                 >
                     <Td>{category.name}</Td>
-                    <Td>{category.description ?? "No description added"}</Td>
-                    <Td>{category.status === "Active"
-                         ?
-                         <span className="text-emerald-500 dark:text-emerald-600 px-3 py-1 bg-emerald-200 dark:bg-emerald-800/50 rounded-md font-semibold">
+                    <Td>{category.description}</Td>
+                    <Td>{
+                        category.status
+                        ?
+                        <span className="text-emerald-500 dark:text-emerald-400 px-3 py-1 bg-emerald-200 dark:bg-emerald-800/50 rounded-md font-semibold">
                             Active
                         </span>
-                         :
-                         <span className="text-rose-500 dark:text-rose-400 px-3 py-1 bg-rose-200 dark:bg-rose-800/50 rounded-md font-semibold">
+                        :
+                        <span className="text-rose-500 dark:text-rose-400 px-3 py-1 bg-rose-200 dark:bg-rose-800/50 rounded-md font-semibold">
                             Inactive
                         </span>}</Td>
                     <Td className={"flex gap-2 justify-center flex-wrap"}>
+                        {
+                            category.status
+                            ? <TableActionPost
+                                routePost={["categories.updateStatus", {
+                                    category: category.id
+                                }]}
+                                message={<XCircleIcon className="w-5 h-5"/>}
+                                className="bg-rose-500 dark:bg-rose-600 text-white dark:text-white hover:bg-rose-700 dark:hover:bg-rose-400 focus:bg-rose-500 dark:focus:bg-rose-700 active:bg-rose-700 dark:active:bg-rose-400 focus:ring-rose-500 dark:focus:ring-offset-rose-400"
+                            />
+                            : <TableActionPost
+                                routePost={["categories.updateStatus", {
+                                    category: category.id
+                                }]}
+                                message={<CheckCircleIcon className="w-5 h-5"/>}
+                                className="bg-emerald-500 dark:bg-emerald-600 text-white dark:text-white hover:bg-emerald-700 dark:hover:bg-emerald-400 focus:bg-emerald-500 dark:focus:bg-emerald-700 active:bg-emerald-700 dark:active:bg-emerald-400 focus:ring-emerald-500 dark:focus:ring-offset-emerald-400"
+                            />
+                        }
                         <TableActionLink
                             redirectRoute={["categories.edit", {
                                 category: category.id
                             }]}
-                            message={"Edit"}
+                            message={<PencilSquareIcon className="w-5 h-5"/>}
                         />
                         <TableActionDelete
                             routePost={["categories.destroy", {
                                 category: category.id
                             }]}
+                            message={<TrashIcon className="w-5 h-5"/>}
                         />
                     </Td>
                 </Tr>;

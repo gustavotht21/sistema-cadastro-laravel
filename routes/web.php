@@ -19,30 +19,36 @@ Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware([
     'auth',
-    'verified'
+    'verified',
 ])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [
         ProfileController::class,
-        'edit'
+        'edit',
     ])->name('profile.edit');
     Route::patch('/profile', [
         ProfileController::class,
-        'update'
+        'update',
     ])->name('profile.update');
     Route::delete('/profile', [
         ProfileController::class,
-        'destroy'
+        'destroy',
     ])->name('profile.destroy');
 
     Route::controller(CategoryController::class)->group(function () {
         Route::get('/categories', 'index')->name('categories.index');
+
         Route::get('/categories/create', 'create')->name('categories.create');
         Route::post('/categories/create', 'store')->name('categories.store');
+
         Route::get('/categories/{category}', 'show')->name('categories.show');
+
         Route::get('/categories/{category}/edit', 'edit')->name('categories.edit');
         Route::patch('/categories/{category}/edit', 'update')->name('categories.update');
+
+        Route::patch('/categories/{category}/update-status', 'updateStatus')->name('categories.updateStatus');
+
         Route::delete('/categories/{category}/delete', 'destroy')->name('categories.destroy');
     });
 });

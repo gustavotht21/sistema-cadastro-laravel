@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {ReactElement, useState} from "react";
 import Modal from "@/Components/Modal";
 import {useForm} from "@inertiajs/react";
 import DangerButton from "@/Components/DangerButton";
@@ -11,7 +11,7 @@ export default function TableActionDelete({
                                               className = ""
                                           }: {
     routePost: TLink,
-    message?: string,
+    message?: string | ReactElement,
     className?: string;
 }) {
     const [confirmingComponentDeletion, setConfirmingComponentDeletion] = useState<boolean>(false);
@@ -61,7 +61,7 @@ export default function TableActionDelete({
                     <DangerButton
                         onClick={closeDeleteModal}
                     >
-                        {message}
+                        Delete
                     </DangerButton>
                 </div>
             </form>

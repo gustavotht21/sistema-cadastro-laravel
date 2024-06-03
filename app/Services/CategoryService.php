@@ -8,7 +8,6 @@ use Inertia\Response;
 
 class CategoryService
 {
-
     public function index(): Response
     {
         return Inertia::render('Category/CategoryIndex', [
@@ -42,6 +41,13 @@ class CategoryService
     {
         return Inertia::render("Category/CategoryEdit", [
             'category' => $category,
+        ]);
+    }
+
+    public function updateStatus(Category $category): void
+    {
+        $category->update([
+            'status' => !$category->getAttribute('status'),
         ]);
     }
 
