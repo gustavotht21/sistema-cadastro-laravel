@@ -19,9 +19,18 @@ class IndexCategoryRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'order'     => [Rule::in('name', 'description', 'status')],
-            'direction' => [Rule::in('asc', 'desc')],
-            'status'    => [Rule::in('all', 'active', 'inactive')],
+            'order'     => [
+                'nullable',
+                Rule::in('name', 'description', 'status')
+            ],
+            'direction' => [
+                'nullable',
+                Rule::in('asc', 'desc')
+            ],
+            'status'    => [
+                'nullable',
+                Rule::in('all', 'active', 'inactive')
+            ],
         ];
     }
 }
