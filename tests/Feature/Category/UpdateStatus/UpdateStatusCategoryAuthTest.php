@@ -33,7 +33,7 @@ it('should authorized users can update category status', function () {
             'description' => 'Category description',
             'status'      => 1,
         ]),
-    ]))->assertRedirect();
+    ]))->assertOk();
 
     $this->assertDatabaseMissing('categories', [
         'status' => 1
