@@ -27,9 +27,9 @@ export function SortBy(field: string, routeParameters?: Record<string, string>):
                       }[direction] || "asc";
 
     router.visit(route(route().current() as string, {
+        ...route().params,
         order    : field,
         direction: dir,
-        ...route().params,
         ...routeParameters,
     }));
 }
