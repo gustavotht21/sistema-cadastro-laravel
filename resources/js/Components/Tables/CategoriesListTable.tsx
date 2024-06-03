@@ -64,14 +64,12 @@ export default function CategoriesListTable({
                 />)}
                 <Th text={"Actions"}/></Tr>}
             body={showUsers.map((category: ICategory, index: number) => {
-                console.log(category.status);
-
                 return <Tr
                     className="odd:bg-white even:bg-gray-50 dark:odd:bg-gray-800 dark:even:bg-gray-700 border-b border-gray-100 dark:border-gray-700 text-sm text-gray-700 dark:text-gray-200"
                     key={index}
                 >
                     <Td>{category.name}</Td>
-                    <Td>{category.description ?? "No description added"}</Td>
+                    <Td>{category.description}</Td>
                     <Td>{
                         category.status
                         ?

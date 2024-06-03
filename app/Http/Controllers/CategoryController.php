@@ -13,7 +13,8 @@ class CategoryController extends Controller
 {
     public function __construct(
         private readonly CategoryService $categoryService
-    ) {
+    )
+    {
     }
 
     public function index(): Response
@@ -45,7 +46,7 @@ class CategoryController extends Controller
     {
         $this->categoryService->updateStatus($category);
 
-        return redirect()->route('categories.index');
+        return redirect()->back();
     }
 
     public function update(UpdateCategoryRequest $request, Category $category): void

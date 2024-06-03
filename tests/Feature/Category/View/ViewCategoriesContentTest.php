@@ -2,7 +2,6 @@
 
 use App\Models\Category;
 use App\Models\User;
-
 use function Pest\Laravel\actingAs;
 use function Pest\Laravel\get;
 
@@ -67,12 +66,12 @@ it('should users can order categories content by status', function () {
     ]);
 
     get(route('categories.index', [
-        'order'     => 'description',
+        'order'     => 'status',
         'direction' => 'desc',
     ]))
         ->assertOk()
         ->assertSeeInOrder([
-            'Category B',
             'Category A',
+            'Category B',
         ]);
 });
