@@ -17,5 +17,5 @@ export type PageProps<T extends Record<string, unknown> = Record<string, unknown
 export interface ICategory extends BaseModel {
     name: string;
     description?: string;
-    status: boolean;
+    status: string;
 }
