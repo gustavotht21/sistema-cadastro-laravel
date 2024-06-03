@@ -1,14 +1,16 @@
 import React, {FormEvent, ReactElement} from "react";
-import {useForm} from "@inertiajs/react";
-import PrimaryButton from "@/Components/PrimaryButton";
+import {router, useForm} from "@inertiajs/react";
 import {TLink} from "@/types/routing";
+import PrimaryButton from "@/Components/PrimaryButton";
 
 export default function TableActionPost({
                                             routePost,
+                                            resource,
                                             className = "",
                                             message,
                                         }: {
-    routePost: TLink
+    routePost: TLink;
+    resource: string;
     className?: string;
     message: string | ReactElement;
 }) {
@@ -16,7 +18,11 @@ export default function TableActionPost({
 
     const submit = (e: FormEvent<HTMLFormElement>): void => {
         e.preventDefault();
-        patch(route(routePost[0], routePost[1]));
+        patch(route(routePost[0], routePost[1]), {
+            onSuccess: () => {
+                router.visit(route(route().current() as string), {only: [resource]});
+            }
+        });
     };
 
     return <form
@@ -24,7 +30,6 @@ export default function TableActionPost({
         onSubmit={submit}
     >
         <PrimaryButton
-            type="submit"
             className={className}
         >
             {message}

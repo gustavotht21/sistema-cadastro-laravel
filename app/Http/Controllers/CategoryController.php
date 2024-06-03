@@ -6,7 +6,6 @@ use App\Http\Requests\StoreCategoryRequest;
 use App\Http\Requests\UpdateCategoryRequest;
 use App\Models\Category;
 use App\Services\CategoryService;
-use Illuminate\Http\RedirectResponse;
 use Inertia\Response;
 
 class CategoryController extends Controller
@@ -42,11 +41,9 @@ class CategoryController extends Controller
         return $this->categoryService->edit($category);
     }
 
-    public function updateStatus(Category $category): RedirectResponse
+    public function updateStatus(Category $category): void
     {
         $this->categoryService->updateStatus($category);
-
-        return redirect()->back();
     }
 
     public function update(UpdateCategoryRequest $request, Category $category): void
