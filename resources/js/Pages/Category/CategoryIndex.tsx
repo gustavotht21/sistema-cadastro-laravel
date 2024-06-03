@@ -4,6 +4,7 @@ import React from "react";
 import CategoriesListTable from "@/Components/Tables/CategoriesListTable";
 import PrimaryButton from "@/Components/PrimaryButton";
 import {Link} from "@inertiajs/react";
+import FilterGroup from "@/Components/FilterGroup";
 
 export default function CategoryIndex({auth, categories}: PageProps<{
     categories: ICategory[];
@@ -14,6 +15,10 @@ export default function CategoryIndex({auth, categories}: PageProps<{
             Category index
         </h2>}
     >
+
+        <FilterGroup
+            searchRoute={"categories.index"}
+        />
 
         <div className="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8 flex justify-end">
             <Link href={route("categories.create")}>
