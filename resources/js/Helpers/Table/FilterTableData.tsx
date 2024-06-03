@@ -18,7 +18,6 @@ export function FilterItems<T extends object, TForm>(
 export function SortBy(field: string, routeParameters?: Record<string, string>): void {
     const order: string = route().params.order;
     const direction: string = route().params.direction;
-    const status: string = route().params.status;
 
     let dir: string = order !== field
                       ? "asc"
@@ -28,9 +27,9 @@ export function SortBy(field: string, routeParameters?: Record<string, string>):
                       }[direction] || "asc";
 
     router.visit(route(route().current() as string, {
+        ...route().params,
         order    : field,
         direction: dir,
-        ...route().params,
         ...routeParameters,
     }));
 }

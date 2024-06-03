@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\IndexCategoryRequest;
 use App\Http\Requests\StoreCategoryRequest;
 use App\Http\Requests\UpdateCategoryRequest;
 use App\Models\Category;
@@ -16,7 +17,7 @@ class CategoryController extends Controller
     {
     }
 
-    public function index(): Response
+    public function index(IndexCategoryRequest $request): Response
     {
         return $this->categoryService->index();
     }

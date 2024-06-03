@@ -75,3 +75,113 @@ it('should users can order categories content by status', function () {
             'Category B',
         ]);
 });
+
+it('should users cannot order categories content by invalid order', function () {
+    $route = 'categories.index';
+    actingAs(User::factory()->create());
+
+    Category::factory()->create([
+        'name' => 'Category A',
+    ]);
+    Category::factory()->create([
+        'name' => 'Category B',
+    ]);
+
+    get(route($route));
+
+    get(route($route, [
+        'order'     => 'invalid',
+        'direction' => 'desc',
+    ]))
+        ->assertRedirect(route($route, [
+            'order'     => null,
+            'direction' => null,
+        ]));
+
+    get(route($route, [
+        'order'     => 'name',
+        'direction' => 'desc',
+    ]));
+
+    get(route($route, [
+        'order'     => 'invalid',
+        'direction' => 'desc',
+    ]))
+        ->assertRedirect(route($route, [
+            'direction' => 'desc',
+            'order'     => 'name',
+        ]));
+});
+
+it('should users cannot order categories content by invalid direction', function () {
+    $route = 'categories.index';
+    actingAs(User::factory()->create());
+
+    Category::factory()->create([
+        'name'        => 'Category A',
+        'description' => 'Category description A',
+    ]);
+    Category::factory()->create([
+        'name'        => 'Category B',
+        'description' => 'Category description B',
+    ]);
+
+    get(route($route));
+
+    get(route($route, [
+        'order'     => 'name',
+        'direction' => 'invalid',
+    ]))
+        ->assertRedirect(route($route, [
+            'order'     => null,
+            'direction' => null,
+        ]));
+
+    get(route($route, [
+        'order'     => 'name',
+        'direction' => 'desc',
+    ]));
+
+    get(route($route, [
+        'order'     => 'name',
+        'direction' => 'invalid',
+    ]))
+        ->assertRedirect(route($route, [
+            'direction' => 'desc',
+            'order'     => 'name',
+        ]));
+});
+
+it('should users cannot order categories content by invalid status', function () {
+    $route = 'categories.index';
+    actingAs(User::factory()->create());
+
+    Category::factory()->create([
+        'name'   => 'Category A',
+        'status' => true,
+    ]);
+    Category::factory()->create([
+        'name'   => 'Category B',
+        'status' => false,
+    ]);
+
+    get(route($route));
+
+    get(route($route, [
+        'status' => 'invalid',
+    ]))
+        ->assertRedirect(route($route, [
+            'status' => null,
+        ]));
+
+    get(route($route, [
+        'status' => 'active',
+    ]));
+
+    get(route($route, [
+        'status' => 'invalid',
+    ]))
+        ->assertRedirect(route($route, [
+            'status' => 'active',
+        ]));
+});
