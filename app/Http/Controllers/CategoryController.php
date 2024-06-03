@@ -6,15 +6,14 @@ use App\Http\Requests\StoreCategoryRequest;
 use App\Http\Requests\UpdateCategoryRequest;
 use App\Models\Category;
 use App\Services\CategoryService;
+use Illuminate\Http\RedirectResponse;
 use Inertia\Response;
 
 class CategoryController extends Controller
 {
-
     public function __construct(
         private readonly CategoryService $categoryService
-    )
-    {
+    ) {
     }
 
     public function index(): Response
@@ -40,6 +39,13 @@ class CategoryController extends Controller
     public function edit(Category $category): Response
     {
         return $this->categoryService->edit($category);
+    }
+
+    public function updateStatus(Category $category): RedirectResponse
+    {
+        $this->categoryService->updateStatus($category);
+
+        return redirect()->route('categories.index');
     }
 
     public function update(UpdateCategoryRequest $request, Category $category): void

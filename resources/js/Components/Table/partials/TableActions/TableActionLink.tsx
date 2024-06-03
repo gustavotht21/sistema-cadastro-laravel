@@ -1,6 +1,7 @@
 import {Link} from "@inertiajs/react";
 import PrimaryButton from "@/Components/PrimaryButton";
 import {TLink} from "@/types/routing";
+import {ReactElement} from "react";
 
 export default function TableActionLink({
                                             redirectRoute,
@@ -8,7 +9,7 @@ export default function TableActionLink({
                                             className = "",
                                         }: {
     redirectRoute: TLink;
-    message: string;
+    message: string | ReactElement;
     className?: string;
 }) {
     return <Link

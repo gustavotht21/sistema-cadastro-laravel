@@ -2,6 +2,7 @@
 
 use App\Models\Category;
 use App\Models\User;
+
 use function Pest\Laravel\actingAs;
 use function Pest\Laravel\get;
 
@@ -56,8 +57,14 @@ it('should users can order categories content by description', function () {
 it('should users can order categories content by status', function () {
     actingAs(User::factory()->create());
 
-    Category::factory()->create(['status' => true]);
-    Category::factory()->create(['status' => false]);
+    Category::factory()->create([
+        'name'   => 'Category A',
+        'status' => true,
+    ]);
+    Category::factory()->create([
+        'name'   => 'Category B',
+        'status' => false,
+    ]);
 
     get(route('categories.index', [
         'order'     => 'description',
@@ -65,7 +72,7 @@ it('should users can order categories content by status', function () {
     ]))
         ->assertOk()
         ->assertSeeInOrder([
-            'Inactive',
-            'Active',
+            'Category B',
+            'Category A',
         ]);
 });

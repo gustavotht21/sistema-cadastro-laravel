@@ -18,7 +18,7 @@ class Category extends Model
     protected $fillable = [
         'name',
         'description',
-        'condition',
+        'status',
     ];
 
     /**
@@ -30,8 +30,8 @@ class Category extends Model
             ->select([
                 'id',
                 'name',
+                'status',
                 DB::raw("CASE WHEN description is null THEN 'No description added' ELSE description END as description"),
-                DB::raw("CASE WHEN status = 1 THEN 'Active' ELSE 'Inactive' END as status"),
             ])
             ->when(!empty(request('order')), function (Builder $builder) {
                 return $builder->orderBy(request('order', 'name'), request('direction', 'asc'));
@@ -40,7 +40,6 @@ class Category extends Model
                 return $builder->orderBy('name');
             })
             ->get();
-
     }
 
     /**
@@ -49,7 +48,7 @@ class Category extends Model
     protected function casts(): array
     {
         return [
-            'condition' => 'boolean',
+            'status' => 'boolean',
         ];
     }
 }
