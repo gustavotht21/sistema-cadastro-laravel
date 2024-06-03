@@ -5,12 +5,12 @@ import PrimaryButton from "@/Components/PrimaryButton";
 
 export default function TableActionPost({
                                             routePost,
-                                            resource,
+                                            urlParameters,
                                             className = "",
                                             message,
                                         }: {
     routePost: TLink;
-    resource: string;
+    urlParameters: string[];
     className?: string;
     message: string | ReactElement;
 }) {
@@ -18,11 +18,21 @@ export default function TableActionPost({
 
     const submit = (e: FormEvent<HTMLFormElement>): void => {
         e.preventDefault();
-        patch(route(routePost[0], routePost[1]), {
-            onSuccess: () => {
-                router.visit(route(route().current() as string), {only: [resource]});
-            }
-        });
+        patch(
+            route(routePost[0], routePost[1]), {
+                preserveScroll: true,
+                onSuccess     : (): void => {
+                    router.visit(
+                        route(route().current() as string),
+                        {
+                            only          : [
+                                ...urlParameters
+                            ],
+                            preserveScroll: true,
+                        });
+                },
+            },
+        );
     };
 
     return <form
