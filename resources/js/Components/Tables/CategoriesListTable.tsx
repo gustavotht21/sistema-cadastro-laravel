@@ -86,7 +86,7 @@ export default function CategoriesListTable({
                                 routePost={["categories.updateStatus", {
                                     category: category.id
                                 }]}
-                                resource={"categories"}
+                                urlParameters={["categories", "order", "direction"]}
                                 message={category.status
                                          ? <XCircleIcon className="w-5 h-5"/>
                                          : <CheckCircleIcon className="w-5 h-5"/>}
