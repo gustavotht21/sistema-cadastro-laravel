@@ -1,6 +1,6 @@
 # Register system
 
-Laravel system made using husky-hooks, larastan and laravel pint, using SOLID and DRY principles
+Laravel system made using husky-hooks, larastan and laravel pint and applying SOLID and DRY principles
 
 ## Index
 
