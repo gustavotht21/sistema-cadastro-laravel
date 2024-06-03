@@ -1,5 +1,4 @@
 import React from "react";
-import {twMerge} from "tailwind-merge";
 import FilterGroupNavLink from "@/Components/FilterGroupNavLink";
 import {TLink} from "@/types/routing";
 
@@ -7,11 +6,11 @@ export default function FilterGroup({
                                         searchRoute,
                                         buttons = [
                                             {
-                                                text: "Active",
+                                                text: "Actives",
                                                 link: "active",
                                             },
                                             {
-                                                text: "Inactive",
+                                                text: "Inactives",
                                                 link: "inactive",
                                             },
                                         ]
@@ -25,7 +24,7 @@ export default function FilterGroup({
 
     return <form
         method="GET"
-        className={"w-full flex justify-center flex-wrap gap-6 my-6"}
+        className={"max-w-3xl mx-auto p-1 mt-6 gap-2 flex justify-center items-center bg-gray-200 dark:bg-gray-800 rounded-lg"}
     >
         {
             buttons.map((button: {
@@ -36,10 +35,9 @@ export default function FilterGroup({
                     key={index}
                     searchRoute={searchRoute}
                     value={button.link}
-                    className={twMerge(
-                        route().params.status === button.link || button.link === buttons[0].link
-                        ? "border-gray-400 dark:border-gray-600 text-gray-900 dark:text-gray-100 focus:border-gray-700"
-                        : "border-transparent text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 hover:border-rose-300 dark:hover:border-rose-700 focus:text-gray-700 dark:focus:text-gray-300 focus:border-rose-300 dark:focus:border-rose-700"
+                    active={(route().params.status
+                             ? route().params.status === button.link
+                             : button.link === buttons[0].link
                     )}
                 >
                     {button.text}

@@ -7,13 +7,15 @@ export default function FilterGroupNavLink({
                                                children,
                                                value,
                                                searchRoute,
-                                               className
+                                               className,
+                                               active,
                                            }:
                                                {
                                                    children: ReactNode,
                                                    value: string;
                                                    searchRoute: string | TLink;
-                                                   className: string;
+                                                   active: boolean;
+                                                   className?: string;
                                                }
 ) {
 
@@ -21,19 +23,34 @@ export default function FilterGroupNavLink({
         <Link
             href={
                 Array.isArray(searchRoute)
-                ? route(searchRoute[0], [
-                    searchRoute[1],
-                    route().params
-                ])
-                : route(searchRoute, route().params)
+                ? route(searchRoute[0], {
+                        ...searchRoute[1],
+                        ...route().params,
+                        status: value,
+                    }
+                )
+                : route(searchRoute, {
+                    ...route().params,
+                    status: value,
+                })
             }
-            className={twMerge("w-40 inline-flex justify-center items-center px-4 py-4 border-b-2 border-t-2 text-md font-medium leading-5 transition duration-150 ease-in-out focus:outline-none",
-                className)}
+            className={
+                "w-full"
+            }
             name={"status"}
             value={value}
-            type={"submit"}
         >
-            {children}
+            <div
+                className={
+                    twMerge(
+                        "w-full inline-flex justify-center items-center py-2 text-sm leading-5 transition duration-300 ease-in-out focus:outline-none rounded-lg",
+                        active
+                        ? "bg-white text-gray-900 font-semibold border border-gray-400 drop-shadow-lg"
+                        : "dark:text-white font-regular dark:hover:bg-gray-950/50 hover:bg-gray-300",
+                        className
+                    )
+                }
+            >{children}</div>
         </Link>
     );
 }
