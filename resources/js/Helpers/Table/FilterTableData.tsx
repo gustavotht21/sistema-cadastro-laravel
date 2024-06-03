@@ -1,5 +1,4 @@
 import {TChangeElement} from "@/types/forms";
-import {TOrdering} from "@/types/search";
 import {router} from "@inertiajs/react";
 
 export function FilterItems<T extends object, TForm>(
@@ -16,13 +15,23 @@ export function FilterItems<T extends object, TForm>(
     });
 }
 
-export function SortBy<T>(field: string, sorting: TOrdering<T>): void {
-    let dir: string = sorting.order !== field
+export function SortBy(field: string, routeParameters?: Record<string, string>): void {
+    const order: string = route().params.order;
+    const direction: string = route().params.direction;
+    const status: string = route().params.status;
+
+    let dir: string = order !== field
                       ? "asc"
                       : {
                           asc : "desc",
                           desc: "asc"
-                      }[sorting.direction] || "asc";
-    router.visit(`${route(route().current() as string, sorting.routeParameters)}?order=${field}&direction=${dir}`);
+                      }[direction] || "asc";
+
+    router.visit(route(route().current() as string, {
+        order    : field,
+        direction: dir,
+        ...route().params,
+        ...routeParameters,
+    }));
 }
 

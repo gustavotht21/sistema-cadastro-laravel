@@ -2,7 +2,6 @@ import React, {ReactElement, useState} from "react";
 import {Th} from "@/Components/Table/partials/Th";
 import {ICategory} from "@/types";
 import Tr from "@/Components/Table/partials/Tr";
-import {TOrdering} from "@/types/search";
 import {TChangeElement} from "@/types/forms";
 import FilterInput from "@/Components/FilterInput";
 import {FilterItems, SortBy} from "@/Helpers/Table/FilterTableData";
@@ -23,14 +22,6 @@ export default function CategoriesListTable({
                                             }: {
     categories: ICategory[];
 }) {
-    const ordering: TOrdering<string> = {
-        order          : route().params.order,
-        direction      : route().params.direction,
-        routeParameters: {
-            status: route().params.status,
-        }
-    };
-
     const [showUsers, setShowUsers] = useState<ICategory[]>(categories);
     const onHandleChange = (e: TChangeElement<TForm>): void => {
         setShowUsers(FilterItems<ICategory, TForm>(categories, e));
@@ -57,7 +48,7 @@ export default function CategoriesListTable({
                 }): ReactElement => <Th
                     ordering={{
                         field  : th.field,
-                        onClick: () => SortBy<string>(th.field, ordering)
+                        onClick: () => SortBy(th.field)
                     }}
                     text={th.text}
                     key={th.field}
@@ -86,7 +77,7 @@ export default function CategoriesListTable({
                                 routePost={["categories.updateStatus", {
                                     category: category.id
                                 }]}
-                                urlParameters={["categories", "order", "direction"]}
+                                urlParameters={["categories", "order", "direction", "status"]}
                                 message={category.status
                                          ? <XCircleIcon className="w-5 h-5"/>
                                          : <CheckCircleIcon className="w-5 h-5"/>}

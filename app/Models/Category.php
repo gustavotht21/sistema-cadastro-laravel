@@ -33,6 +33,10 @@ class Category extends Model
                 'status',
                 DB::raw("CASE WHEN description is null THEN 'No description added' ELSE description END as description"),
             ])
+            ->when(!empty(request('status')), static function (Builder $builder) {
+                $builder->when(request('status') === 'active', fn(Builder $builder) => $builder->where('status', 1));
+                $builder->when(request('status') === 'inactive', fn(Builder $builder) => $builder->where('status', 0));
+            })
             ->when(!empty(request('order')), function (Builder $builder) {
                 return $builder->orderBy(request('order', 'name'), request('direction', 'asc'));
             })
