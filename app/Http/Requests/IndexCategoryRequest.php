@@ -4,6 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class IndexCategoryRequest extends FormRequest
 {
@@ -18,9 +19,9 @@ class IndexCategoryRequest extends FormRequest
     public function rules(): array
     {
         return [
-//            'order'     => [Rule::in('name', 'description', 'status')],
-//            'direction' => [Rule::in('asc', 'desc')],
-//            'status'    => [Rule::in('all', 'active', 'inactive')],
+            'order'     => [Rule::in('name', 'description', 'status')],
+            'direction' => [Rule::in('asc', 'desc')],
+            'status'    => [Rule::in('all', 'active', 'inactive')],
         ];
     }
 }
