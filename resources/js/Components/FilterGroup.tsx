@@ -6,6 +6,10 @@ export default function FilterGroup({
                                         searchRoute,
                                         buttons = [
                                             {
+                                                text: "All",
+                                                link: "all",
+                                            },
+                                            {
                                                 text: "Actives",
                                                 link: "active",
                                             },
