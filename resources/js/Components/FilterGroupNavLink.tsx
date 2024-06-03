@@ -46,7 +46,7 @@ export default function FilterGroupNavLink({
                         "w-full inline-flex justify-center items-center py-2 text-sm leading-5 transition duration-300 ease-in-out focus:outline-none rounded-lg",
                         active
                         ? "bg-white text-gray-900 font-semibold border border-gray-400 drop-shadow-lg"
-                        : "dark:text-white font-regular dark:hover:bg-gray-950/50 hover:bg-gray-300",
+                        : "dark:text-white font-regular dark:hover:bg-gray-700 hover:bg-gray-300",
                         className
                     )
                 }

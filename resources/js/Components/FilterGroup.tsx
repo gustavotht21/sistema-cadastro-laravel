@@ -26,27 +26,29 @@ export default function FilterGroup({
     }[];
 }) {
 
-    return <form
-        method="GET"
-        className={"max-w-3xl mx-auto p-1 mt-6 gap-2 flex justify-center items-center bg-gray-200 dark:bg-gray-800 rounded-lg"}
-    >
-        {
-            buttons.map((button: {
-                text: string,
-                link: string,
-            }, index: number) => {
-                return <FilterGroupNavLink
-                    key={index}
-                    searchRoute={searchRoute}
-                    value={button.link}
-                    active={(route().params.status
-                             ? route().params.status === button.link
-                             : button.link === buttons[0].link
-                    )}
-                >
-                    {button.text}
-                </FilterGroupNavLink>;
-            })
-        }
-    </form>;
+    return <div className="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+        <form
+            method="GET"
+            className={"flex justify-center items-center p-1 gap-2 bg-gray-200 dark:bg-gray-800 rounded-lg"}
+        >
+            {
+                buttons.map((button: {
+                    text: string,
+                    link: string,
+                }, index: number) => {
+                    return <FilterGroupNavLink
+                        key={index}
+                        searchRoute={searchRoute}
+                        value={button.link}
+                        active={(route().params.status
+                                 ? route().params.status === button.link
+                                 : button.link === buttons[0].link
+                        )}
+                    >
+                        {button.text}
+                    </FilterGroupNavLink>;
+                })
+            }
+        </form>
+    </div>;
 }
