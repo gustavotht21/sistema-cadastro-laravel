@@ -71,8 +71,8 @@ export default function CategoriesListTable({
                              ? "Active"
                              : "Inactive"}
                         </span></Td>
-                    <Td className={"flex gap-2 justify-center flex-wrap"}>
-                        {
+                    <Td>
+                        <div className="flex justify-center items-center gap-2">
                             <TableActionPost
                                 routePost={["categories.updateStatus", {
                                     category: category.id
@@ -85,25 +85,22 @@ export default function CategoriesListTable({
                                            ? "bg-rose-500 dark:bg-rose-600 text-white dark:text-white hover:bg-rose-700 dark:hover:bg-rose-400 focus:bg-rose-500 dark:focus:bg-rose-700 active:bg-rose-700 dark:active:bg-rose-400 focus:ring-rose-500 dark:focus:ring-offset-rose-400"
                                            : "bg-emerald-500 dark:bg-emerald-600 text-white dark:text-white hover:bg-emerald-700 dark:hover:bg-emerald-400 focus:bg-emerald-500 dark:focus:bg-emerald-700 active:bg-emerald-700 dark:active:bg-emerald-400 focus:ring-emerald-500 dark:focus:ring-offset-emerald-400"}
                             />
-                        }
-                        <TableActionLink
-                            redirectRoute={["categories.edit", {
-                                category: category.id
-                            }]}
-                            message={<PencilSquareIcon className="w-5 h-5"/>}
-                        />
-                        <TableActionDelete
-                            routePost={["categories.destroy", {
-                                category: category.id
-                            }]}
-                            message={<TrashIcon className="w-5 h-5"/>}
-                        />
+                            <TableActionLink
+                                redirectRoute={["categories.edit", {
+                                    category: category.id
+                                }]}
+                                message={<PencilSquareIcon className="w-5 h-5"/>}
+                            />
+                            <TableActionDelete
+                                routePost={["categories.destroy", {
+                                    category: category.id
+                                }]}
+                                message={<TrashIcon className="w-5 h-5"/>}
+                            />
+                        </div>
                     </Td>
                 </Tr>;
-
-
             })}
         />
-    </>
-        ;
+    </>;
 }

@@ -10,9 +10,9 @@ export function Table({head, body, fixed}: {
 }) {
     return (
         <div className={"flex justify-center max-w-7xl w-full mx-auto py-6 px-4 sm:px-6 lg:px-8"}>
-            <div className="relative overflow-x-auto shadow-md rounded-lg w-full">
+            <div className="relative overflow-x-auto shadow-md rounded-lg">
                 <table
-                    className={twMerge("w-full text-sm text-center text-gray-900", fixed && "table-fixed")}
+                    className={twMerge("w-[1080px] lg:w-full text-sm text-center text-gray-900", fixed && "table-fixed")}
                 >
                     <TableHead children={head}/>
                     <TableBody children={body}/>
