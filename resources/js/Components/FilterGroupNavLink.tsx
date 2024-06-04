@@ -18,6 +18,12 @@ export default function FilterGroupNavLink({
                                                    className?: string;
                                                }
 ) {
+    const defaultUrlParameters: {
+        status: string;
+    } & Record<string, string | number> = {
+        ...route().params,
+        status: value,
+    };
 
     return (
         <Link
@@ -25,20 +31,14 @@ export default function FilterGroupNavLink({
                 Array.isArray(searchRoute)
                 ? route(searchRoute[0], {
                         ...searchRoute[1],
-                        ...route().params,
-                        status: value,
+                        ...defaultUrlParameters
                     }
                 )
                 : route(searchRoute, {
-                    ...route().params,
-                    status: value,
+                    ...defaultUrlParameters
                 })
             }
-            className={
-                "w-full"
-            }
-            name={"status"}
-            value={value}
+            className="w-full"
         >
             <div
                 className={
