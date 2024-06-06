@@ -3,18 +3,9 @@
 namespace App\Services;
 
 use App\Models\Category;
-use Inertia\Inertia;
-use Inertia\Response;
 
 class CategoryService
 {
-    public function index(): Response
-    {
-        return Inertia::render('Category/CategoryIndex', [
-            'categories' => Category::search(),
-        ]);
-    }
-
     /**
      * @param array<string, string> $data
      */
@@ -24,23 +15,6 @@ class CategoryService
             'name'        => $data['name'],
             'description' => $data['description'],
             'status'      => true,
-        ]);
-    }
-
-    public function create(): Response
-    {
-        return Inertia::render("Category/CategoryCreate");
-    }
-
-    public function show(Category $category): void
-    {
-        //
-    }
-
-    public function edit(Category $category): Response
-    {
-        return Inertia::render("Category/CategoryEdit", [
-            'category' => $category,
         ]);
     }
 

@@ -7,6 +7,7 @@ use App\Http\Requests\StoreCategoryRequest;
 use App\Http\Requests\UpdateCategoryRequest;
 use App\Models\Category;
 use App\Services\CategoryService;
+use Inertia\Inertia;
 use Inertia\Response;
 
 class CategoryController extends Controller
@@ -19,12 +20,14 @@ class CategoryController extends Controller
 
     public function index(IndexCategoryRequest $request): Response
     {
-        return $this->categoryService->index();
+        return Inertia::render('Category/CategoryIndex', [
+            'categories' => Category::search(),
+        ]);
     }
 
     public function create(): Response
     {
-        return $this->categoryService->create();
+        return Inertia::render("Category/CategoryCreate");
     }
 
     public function store(StoreCategoryRequest $request): void
@@ -32,14 +35,9 @@ class CategoryController extends Controller
         $this->categoryService->store($request->validated());
     }
 
-    public function show(Category $category): void
-    {
-        //
-    }
-
     public function edit(Category $category): Response
     {
-        return $this->categoryService->edit($category);
+        return Inertia::render("Category/CategoryEdit", compact('category'));
     }
 
     public function updateStatus(Category $category): void
