@@ -5,19 +5,25 @@ import {TLink} from "@/types/routing";
 
 export default function FilterGroupNavLink({
                                                children,
-                                               value,
+                                               status,
                                                searchRoute,
                                                className,
                                                active,
                                            }:
                                                {
                                                    children: ReactNode,
-                                                   value: string;
+                                                   status: string;
                                                    searchRoute: string | TLink;
                                                    active: boolean;
                                                    className?: string;
                                                }
 ) {
+    const defaultUrlParameters: {
+        status: string;
+    } & Record<string, string | number> = {
+        ...route().params,
+        status: status,
+    };
 
     return (
         <Link
@@ -25,20 +31,14 @@ export default function FilterGroupNavLink({
                 Array.isArray(searchRoute)
                 ? route(searchRoute[0], {
                         ...searchRoute[1],
-                        ...route().params,
-                        status: value,
+                        ...defaultUrlParameters
                     }
                 )
                 : route(searchRoute, {
-                    ...route().params,
-                    status: value,
+                    ...defaultUrlParameters
                 })
             }
-            className={
-                "w-full"
-            }
-            name={"status"}
-            value={value}
+            className="w-full"
         >
             <div
                 className={
