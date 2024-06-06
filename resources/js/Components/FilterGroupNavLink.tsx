@@ -5,14 +5,14 @@ import {TLink} from "@/types/routing";
 
 export default function FilterGroupNavLink({
                                                children,
-                                               value,
+                                               status,
                                                searchRoute,
                                                className,
                                                active,
                                            }:
                                                {
                                                    children: ReactNode,
-                                                   value: string;
+                                                   status: string;
                                                    searchRoute: string | TLink;
                                                    active: boolean;
                                                    className?: string;
@@ -22,7 +22,7 @@ export default function FilterGroupNavLink({
         status: string;
     } & Record<string, string | number> = {
         ...route().params,
-        status: value,
+        status: status,
     };
 
     return (
